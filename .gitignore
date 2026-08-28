@@ -1,0 +1,24 @@
+.Rproj.user
+.Rhistory
+.Ruserdata
+figure
+*.html
+docs/
+*.tar.gz
+
+# Many kinds of data files
+*.rda
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.sav
+*.dta
+*.sas7bdat
+*.rds
+*.RData
+*.sql
+
+*.zip
+*.tar
+*.gz

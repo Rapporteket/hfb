@@ -1,0 +1,21 @@
+FROM rapporteket/base-r-alpine-latex:main
+
+LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
+
+WORKDIR /app/R
+
+RUN --mount=type=secret,id=github_pat,env=GITHUB_PAT \
+    --mount=type=bind,source=.,target=/app/R/pkg \
+    R -e "remotes::install_local(path = './pkg')" \
+    R -e "library(rapRegTemplate)"
+
+EXPOSE 3838
+
+# Needed to run shiny app on NHN infrastructure
+RUN adduser --uid 1000 --disabled-password rapporteket && \
+    chown -R 1000:1000 /app/R && \
+    chmod -R 755 /app/R
+
+USER 1000:1000
+
+CMD ["R", "-e", "options(shiny.port = 3838,shiny.host = \"0.0.0.0\"); rapRegTemplate::run_app()"]
