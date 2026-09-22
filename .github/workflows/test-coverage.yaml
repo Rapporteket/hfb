@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   test-coverage:
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_COMPILE_AND_INSTALL_PACKAGES: never
